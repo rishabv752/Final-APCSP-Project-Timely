@@ -1,0 +1,220 @@
+<html>
+<script type="text/javascript">
+
+
+//Credits to: https://stackoverflow.com/questions/31948235/stopwatch-timer-save-var-and-show-in-high-score-list-html-js?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
+//This is an very similar, but still adaptation of the code for creating a timer on the page
+var clsStopwatch = function() {
+   // Private vars
+   var startAt = 0; // Time of last start / resume. (0 if not running)
+   var lapTime = 0; // Time on the clock when last stopped in milliseconds
+
+   var now = function() {
+     return (new Date()).getTime();
+   };
+
+   // Public methods
+   // Start or resume
+   this.start = function() {
+     startAt = startAt ? startAt : now();
+   };
+
+   // Stop or pause
+   this.stop = function() {
+     // If running, update elapsed time otherwise keep it
+     lapTime = startAt ? lapTime + now() - startAt : lapTime;
+     startAt = 0; // Paused
+   };
+
+   // Reset
+   this.reset = function() {
+     lapTime = startAt = 0;
+   };
+
+   // Duration
+   this.time = function() {
+     return lapTime + (startAt ? now() - startAt : 0);
+   };
+ };
+
+ var x = new clsStopwatch();
+ var $time;
+ var clocktimer;
+ var ourTime = 3;
+
+ function pad(num, size) {
+   var s = "0000" + num;
+   return s.substr(s.length - size);
+ }
+// calculation for times in hours, minutes, seconds, miliseconds
+ function formatTime(time) {
+   var h = m = s = ms = 0;
+   var newTime = '';
+
+   h = Math.floor(time / (60 * 60 * 1000));
+   time = time % (60 * 60 * 1000);
+   m = Math.floor(time / (60 * 1000));
+   time = time % (60 * 1000);
+   s = Math.floor(time / 1000);
+   ms = time % 1000;
+
+   newTime = pad(h, 2) + ':' + pad(m, 2) + ':' + pad(s, 2) + ':' + pad(ms, 3);
+   return newTime;
+ }
+//this is the time that will be changing in HTML, the visual stopwatch
+ function update() {
+   $time.innerHTML = formatTime(x.time());
+ }
+//starts timer when called
+ function start() {
+   $time = document.getElementById('time');
+   clocktimer = setInterval("update()", 41);
+   x.start();
+ }
+//stops timer when called
+ function stop() {
+   x.stop();
+   clearInterval(clocktimer);
+ }
+//this function displays and makes elements in HTML disappear and also calls the start function
+function starthw(){
+  document.getElementById("starthw").style.display = "none";
+  document.getElementById("writehw").style.display = "block";
+  document.getElementById("stopwatch").style.display = "block";
+  document.getElementById("submit").style.display = "block";
+  start();
+
+}
+//displays text that shows how much time it took and how much time was initially given
+function display(){
+  var time_givenhr=document.getElementById("hours").value
+  var time_givenmin=document.getElementById("minutes").value
+  var time_taken = $time.innerHTML = formatTime(x.time());
+  document.getElementById("submit").style.display = "none";
+  document.getElementById("stopwatch").style.display = "none";
+  document.getElementById("reload").style.display = "block";
+  document.getElementById("empty").innerText = "You were given " + time_givenhr + " hour(s) and " + time_givenmin + " minutes and you took " + time_taken   + " to complete your work. Screenshot this and send to your teacher on Schoology for their reference."
+
+}
+//calls stop timer functions and display function
+function finishhw(){
+  stop();
+  display()
+//when the specific button is pressed the page is reloaded
+
+function reload(){
+  location.reload();
+}
+
+
+
+
+
+}
+</script>
+<head>
+<style>
+/*CSS styling for HTML entities*/
+html,body{
+  background-color: #b2ff70;
+  opacity: 80%;
+}
+h1{
+  font-family: "Apple Chancery", cursive;
+  text-align: center;
+  margin-top: 50px;
+
+}
+p{
+  text-align: center;
+  font-family: "Times New Roman";
+  font-size: 110%;
+  margin:75px;
+}
+#writehw{
+  display: none;
+}
+#submithw{
+  display: none;
+}
+#stopwatch{
+  display: none;
+}
+#submit{
+  display: none;
+}
+#reload{
+  display: none;
+}
+</style>
+</head>
+<body>
+  <!--HTML entities-->
+  <h1> Welcome to the Timely Homework Manager</h1>
+  <p> Our goal is to help see if the homework given to students is too much. Follow the instructions below and do your homework. Once completed press submit and you will receive feedback on your workload.</p>
+  <div class="timer">
+    <label for="hours"><b> How Much Time will the Homework take?</b></label>
+    <!--Creates a box around the following entities-->
+    <form>
+      <fieldset>
+        Hours:
+          <select id="hours">
+            <!--dropbox-->
+              <option value="0">0 hours</option>
+              <option value="1">1 hour</option>
+              <option value="2">2 hours</option>
+              <option value="3">3 hours</option>
+              <option value="4">4 hours</option>
+              <option value="5">5 hours</option>
+              <option value="6">6 hours</option>
+              <option value="7">7 hours</option>
+              <option value="8">8 hours</option>
+              <option value="9">9 hours</option>
+              <option value="10">10 hours</option>
+        </select>
+        Minutes:
+        <select id="minutes">
+          <option value="0">0 minutes</option>
+          <option value="5">5 minutes</option>
+          <option value="10">10 minutes</option>
+          <option value="15">15 minutes</option>
+          <option value="20">20 minutes</option>
+          <option value="25">25 minutes</option>
+          <option value="30">30 minutes</option>
+          <option value="35">35 minutes</option>
+          <option value="40">40 minutes</option>
+          <option value="45">45 minutes</option>
+          <option value="50">50 minutes</option>
+          <option value="55">55 minutes</option>
+      </select>
+    </fieldset>
+  </form>
+</div>
+
+
+
+<div id="writehw">
+  <label for="task"><b> Press Start to Begin Writing your Homework</b></label>
+<!--Creates a box as well as a text box for writing the homework down-->
+  <form>
+    <textarea rows="30" cols="100" placeholder="Start typing here">
+    </textarea>
+
+</div>
+<!--Where the stopwatch will be displayed-->
+<div id="stopwatch">Time: <span id="time"></span></div>
+
+<div id="submit">
+
+  <input type="button" value="Submit" onclick="finishhw();">
+</div>
+
+<div id="empty"></div>
+
+<div id="reload">
+  <input type="button" value="Reset" onclick="reload()">
+</div>
+
+<div id="starthw">
+  <input type="button" value="Start" onclick="starthw();">
+</div>

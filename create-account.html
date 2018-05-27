@@ -1,0 +1,123 @@
+<html>
+<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
+<script>
+  // Initialization of Firebase
+  var config = {
+    apiKey: "AIzaSyDElYPtm6mhbBXr3VXUKHiby3hVrxvmyEw",
+    authDomain: "timely-testing.firebaseapp.com",
+    databaseURL: "https://timely-testing.firebaseio.com",
+    projectId: "timely-testing",
+    storageBucket: "",
+    messagingSenderId: "449113829454"
+  };
+  firebase.initializeApp(config);
+</script>
+<head>
+  <!--The following scripts are for what language and API's will be used in the Javascript code-->
+  <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase.js"></script>
+
+  <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+  <script>
+  username1=document.getElementById("uname1")
+  password1=document.getElementById("password1")
+  //adding account to the database when the user signs up
+  function signup(){
+    firebase.auth().createUserWithUsernameAndPassword(username1,password1).catch(function(error)){
+      var errorCode=error.code;
+      var errorMessage = error.message
+    }
+  });
+}
+  </script>
+<style>
+/* CSS styling for HTML entities*/
+body {font-family: Arial, Helvetica, sans-serif;
+background-color: #6bff6d;
+opacity: 10%}
+h2{font-family:  "Comic Sans MS", "Comic Sans", cursive;
+text-align: center;}
+
+input[type=text] {
+    width: 30%;
+    padding: 12px 20px;
+    margin: 15px 10px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+ input[type=password]{
+ width: 30%;
+ padding: 12px 20px;
+ margin: 15px 10px;
+ margin-top:5px;
+ display: inline-block;
+ border: 1px solid #ccc;
+ box-sizing: border-box;
+}
+.pass{
+  margin-left:15px;
+}
+button {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #ffffff;
+  font-size: 20px;
+  background: #a1d8fc;
+  padding: 10px 20px 10px 22px;
+  text-decoration: none;
+}
+
+button:hover {
+  background: #3cb0fd;
+  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+  text-decoration: none;
+}
+
+.createaccount{
+    width: auto;
+    padding: 10px 18px;
+    background-color: #f44336;
+}
+
+
+.main {
+    padding: 20px;
+}
+
+    .createaccount {
+       width: 100%;
+    }
+#login{
+  margin-left: 5%;
+  margin-top: 5%;
+}
+}
+</style>
+</head>
+<body>
+<!-- The HTML entities-->
+<h2>Create Account</h2>
+
+  <div class="main">
+    <!--Username text entry-->
+    <label for="username1" required><b>Username</b></label>
+    <input type="text" placeholder="Enter Your Desired Username" name="uname" id="uname1" required>
+  </div>
+
+<div class = "pass">
+  <!--Password text entry-->
+  <label for="password1" required><b>Password</b></label>
+  <input type="password" placeholder="Enter Your Desired Password" name="Password" id="password1"required>
+</div>
+<!--Button which is connected to next HTML page and also calls the Javascript function for saving on Firebase-->
+<button type="Login" id="login" onclick="signup()"><a href="homework.html">Sign Up</a></button>
+</form>
+
+</body>
+</html>

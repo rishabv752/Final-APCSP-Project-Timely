@@ -1,0 +1,53 @@
+<html>
+<head>
+<!--The following code is the CSS styling of the HTML entities-->
+<style>
+/* The body will cover the whole page */
+body,html{
+  height:100%;
+  margin:0;
+
+}
+/* The image in my file will be the background and cover the whole page, this image won't be repeated*/
+.background{
+  background-image: url("file:///Users/Rishab/Desktop/background.png");
+  height:100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover
+
+}
+
+/* Styling for all button entities */
+.button {
+  margin-top: 500px;
+  margin-left: 325px;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0px;
+  font-family: Arial;
+  color: #a66257;
+  font-size: 20px;
+  background: #ffffff;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+  position: relative;
+}
+/*Styling for when the user hovers over the button*/
+.button:hover {
+  background: #a66257;
+  color:#ffffff;
+  text-decoration: none;
+  transition: ease-in .5s;
+}
+</style>
+</head>
+<!--All the HTML entities -->
+<body>
+<div class="background">
+  <button class="button"><a href="student-login.html"> Login </a> </button>
+  <button class="button" id="create"><a href="create-account.html"> Create Account</a></button>
+</div>
+
+</body>
+</html>
